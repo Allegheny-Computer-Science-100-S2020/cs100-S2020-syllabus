@@ -1,0 +1,16 @@
+language: ruby
+before_install:
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends latexmk
+  texlive-fonts-extra texlive-fonts-recommended texlive-latex-base texlive-latex-extra
+  texlive-latex-recommended
+script:
+- mkdir _build
+- latexmk -pdf -outdir=_build cs100S2020_syllabus.tex
+deploy:
+  provider: releases
+  api_key:
+    secure: NR0rBNY+LFPStVwkSqhvfX5j4v8x3+vyd/PTo1/JsxldlC7qh2sM/04jr226XB/xcjGyReZINGWKRNmJ7foz/1SHqmdZKrQtrKBTfenAcz46ch0wVeUceNsGMCrUCp2UVGKoXLR8qAeAwrwZ/j7gOZNABfSJ8uJqP0RwYwpdC/7rxUGGFNnm2b+SNnO3TI10Xp2GoNwjIWCXvoOXJscjFTZH2rAfJ92Ave9/308NBLRjzSNib4Fa90Oirkcd3RdCqHGr357GXUkLTPjfveRIMYRAmpizWutuGM/7ZKmeWAMDNoEXtV6rdtLJtnmDGJQSCLOxYtXLeAnqBX0aXFH7CBsG8wk7hdrIQJRltLAemLpY/GCZ8rlftvLYBvzIV/ONIRxJXeGmpzohUehYrZv8C4yVY9kPj2UoW5/RQK4cLKTojbxdcNZXr4qxYQPcDSi3/HCqWJO3zKIwdxAFuBdIPU7+U73w3ea8AlIX7BjXzwTktnpx6itRY5zWXpCLPeui7yDDtn89R2BV209fCinUyJpsrEM2Fco4P+ODeZZv3nuNrPfos3h3Hnvwh+CY9eB+Dg9e+XjysJ9s5ccFKCSrhtdN5Pw0KQkQK8GeJZWcncUTBrGBBuda+/rSE5nV9x74ECmzyDzBaAfHeyxy2lPMWCgxAAtzYqJ59/DWpkHdbUg=
+  file: _build/cs100S2020_syllabus.pdf
+  skip_cleanup: true
+  on:
+    tags: true
